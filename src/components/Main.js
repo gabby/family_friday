@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Home from './Home';
 import Navbar from './Navbar';
+import Home from './Home';
+import EmployeeList from './EmployeeList';
 
 export default class Main extends Component{
   constructor(props){
@@ -13,7 +14,8 @@ export default class Main extends Component{
       <div>
         <Navbar/>
         <Switch>
-          <Route exact path ="/home" component={Home}/>
+          <Route exact path ="/" component={Home}/>
+          <Route exact path ="/list" component={EmployeeList}/>
         </Switch>
       </div>
     )

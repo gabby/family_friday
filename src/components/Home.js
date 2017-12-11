@@ -17,7 +17,6 @@ class Home extends Component {
     .then(res => res.text())
     .then(textFile => textFile.split('\n'))
     .then(namesArr => {
-      console.log(namesArr)
       this.props.setList(namesArr)
     })
     .catch(error)
@@ -47,4 +46,5 @@ const mapDispatchToProps = dispatch => {
     }
   }
 }
+
 export default connect(null, mapDispatchToProps)(Home);

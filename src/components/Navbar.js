@@ -12,7 +12,7 @@ const Navbar = () => {
     <AppBar 
     title="apartment list"
     titleStyle={{color:black}}
-    iconElementLeft={<Link to="/home"><img src="/public/al_thumb.jpg"/></Link>}
+    iconElementLeft={<Link to="/"><img src="/public/al_thumb.jpg"/></Link>}
     iconElementRight={<Link to="/list"><FlatButton type="button" label='Employee List' style={{backgroundColor:white, color:black}}></FlatButton></Link>}
     style={{backgroundColor:white}}>
     </AppBar>
