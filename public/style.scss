@@ -19,3 +19,15 @@
   display:flex;
   justify-content: center;
 }
+
+.paper-group{
+  width: 200px;
+  margin: 5px;
+  padding: 10px;
+}
+
+.groups-container{
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}

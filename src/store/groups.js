@@ -1,13 +1,13 @@
-const GENERATE_GROUPS = 'GENERATE_GROUPS';
+const SET_GROUPS = 'GENERATE_GROUPS';
 const RESET_GROUPS = 'RESET_GROUPS';
 
-const generateNewGroups = (groups) => {
+export const setNewGroups = groups => {
   return {
-    type: GENERATE_GROUPS, groups
+    type: SET_GROUPS, groups
   }
 } 
 
-const resetGroups = () => {
+export const resetGroups = () => {
   return{
     type: RESET_GROUPS
   }
@@ -15,7 +15,7 @@ const resetGroups = () => {
 
 export default function reducer(state = [], action){
   switch(action.type){
-    case GENERATE_GROUPS: return action.groups;
+    case SET_GROUPS: return action.groups;
     case RESET_GROUPS: return [];
     default: return state;
   }
