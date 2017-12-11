@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { setEmployeeList } from "../store"
 import { error } from 'util';
+import { RaisedButton } from 'material-ui';
+import "../../public/style.scss";
 
 
 class Home extends Component {
@@ -23,7 +26,14 @@ class Home extends Component {
   render(){
     return (
       <div>
-        HELLO LA LA LAND
+        <div className="home">
+         <img className="banner" src="../../public/group_photo.jpg" />
+        </div>
+        <div className="groups-button">
+          <Link to="/groups">
+            <RaisedButton label="Groups"/>
+          </Link>
+        </div>
       </div>
     )
   }
