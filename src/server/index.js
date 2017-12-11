@@ -15,9 +15,10 @@ app.use('/wepback', express.static(path.join(__dirname, '../../dist')));
 app.get('*', (req, res, next) => res.sendFile(path.join(__dirname, '../../public/index.html')));
 
 app.use((err, req, res, next) => {
-  console.error(err);
-  console.error(err.stack);
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.status(errstatus || 500).send(err.message || 'Internal server error');
+  next();
 }); 
 
 const port = process.env.PORT || 3000; 

@@ -5,6 +5,9 @@ module.exports = {
     filename: './dist/index.js'
   },
   devtool: 'source-map',
+  node: {
+    fs: "empty"
+  },
   module: {
     rules: [
       {
@@ -22,7 +25,12 @@ module.exports = {
           'css-loader',
           'sass-loader'
         ]
+      },
+      {
+        test: /\.txt$/,
+        use: 'raw-loader'
       }
     ]
-  }
+  },
 }; 
+
