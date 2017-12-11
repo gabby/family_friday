@@ -1,5 +1,5 @@
 module.exports = {
-  entry: './src/index.js',
+  entry: './src',
   output: {
     path: __dirname,
     filename: './dist/index.js'
@@ -8,9 +8,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.js?$/,
         exclude: /(node_modules|bower_components)/,
-        loader: 'babel-loader'
+        loader: 'babel-loader',
+        options: {
+          presets: ['react', 'es2015']
+        }
       },
       {
         test: /\.scss$/,
