@@ -22,8 +22,6 @@ class Home extends Component {
       })
       .catch(error)
     }
-    const localSto = localStorage.getItem('groups');
-    if (localSto) return this.props.setGroups(JSON.parse(localSto));
   };
 
   render(){
