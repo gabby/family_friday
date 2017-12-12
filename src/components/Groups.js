@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setNewGroups } from "../store";
-import { AppBar, Subheader, Divider, Paper, List, ListItem } from 'material-ui';
-import { white, black } from 'material-ui/styles/colors';
+import { setNewGroups, resetGroups } from "../store";
+import { AppBar, Subheader, Divider, Paper, List, ListItem, RaisedButton } from 'material-ui';
 import "../../public/style.scss"
 
 class Groups extends Component {
@@ -11,6 +10,7 @@ class Groups extends Component {
     super(props)
     this.generateGroups = this.generateGroups.bind(this)
     this.findGroupSize = this.findGroupSize.bind(this)
+    this.handleResetGroups = this.handleResetGroups.bind(this)
   }
 
   // Helper function to determine Group Size 
@@ -54,6 +54,12 @@ class Groups extends Component {
     }
   }
 
+  handleResetGroups(event){
+    event.preventDefault();
+    this.props.reset();
+    localStorage.removeItem('groups');
+  }
+
   render(props){
     let groups = this.props.groups;
     let date = localStorage.getItem('date_generated')
@@ -61,6 +67,11 @@ class Groups extends Component {
       <div className="groups-container">
         <h2>Groups for Family Friday</h2> 
         <h6>Generated on: {date}</h6>
+        <div className="reset-button">
+          <Link to="/">
+            <RaisedButton type='button' label='Reset' onClick={this.handleResetGroups}/>
+          </Link>
+        </div>
         <div className="groups"> 
           {
             groups.map(group => {
@@ -98,6 +109,9 @@ const mapDispatchToProps = dispatch => {
   return {
     setGroups: groups => {
         dispatch(setNewGroups(groups))
+    },
+    reset: () => {
+      dispatch(resetGroups())
     }
   }
 }
