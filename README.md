@@ -14,23 +14,16 @@ These instructions will get you a copy of the project up and running on your loc
 
 Given the scope of the challenge, handling pretty much everything on the client-side made the most sense. While I'll go into future improvements of what a database can offer in the next section, it would be overkill to setup a database for a simple app such as this. However, there are tradeoffs: 
 
-```
-Groups must be generated from the same exact browser to utilize the data stored in local storage for the most up-to-date list. This is inconvenient and can easily become more difficult to maintain when new employees are added frequently, and/or if any employee can generate teams. 
-```
-```
-This implementation assumes that all employees will be present and/or will be participating in Family Friday. Someone may be out of office or have a prior engagement. Additionally, removing employees can be supported, but not the most efficiently in this client-side application.
-```
-```
-Group sort does not take employee department into consideration, especially if the goal is to diversify the groups each week. 
-```
-```
-History of group formations, and any data along with that, cannot be stored.   
-```
+* Groups must be generated from the same exact browser to utilize the data stored in local storage for the most up-to-date list. This is inconvenient and can easily become more difficult to maintain when new employees are added frequently, and/or if any employee can generate teams. 
+* This implementation assumes that all employees will be present and/or will be participating in Family Friday. Someone may be out of office or have a prior engagement. Additionally, removing employees can be supported, but not the most efficiently in this client-side application.
+* Group sort does not take employee department into consideration, especially if the goal is to diversify the groups each week. 
+* History of group formations, and any data along with that, cannot be stored.   
+
 
 ### Future Improvements
 
 To account for the above limitations I would consider the following improvements: 
-* Database - to store additional data like: department, attending/not-attending, previous group formations, this would serve as one source of truth to any employee who would like to generate a group, and can account if a group has already been generated 
+* Database: to store additional data like: department, attending/not-attending, previous group formations, this would serve as one source of truth to any employee who would like to generate a group, and can account if a group has already been generated 
 * Admin/Employee login so someone may mark themselves as absent, or an admin (ea, office coordinator, HR, etc) could mark others as absent
 * List maintentance will be  more manageable, for example, addnew employees can be automated with one of HR's onboarding processes, and an Admin for example can remove users from a list
 * With historical data of groups formed, we can generate different groups each week 
