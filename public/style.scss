@@ -1,3 +1,7 @@
+* {
+  font-family:'Roboto', 'sans-serif' 
+}
+
 .home{
   display:flex;
   justify-content: center;
@@ -6,8 +10,8 @@
 .banner{
   width: 60%;
   height:60%;
-  padding: 0px;
-  margin: 0px;
+  padding: 10px;
+  margin: 10px;
 }
 
 .groups-button{
@@ -26,7 +30,7 @@
   padding: 10px;
 }
 
-.groups-container{
+.groups{
   display:flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -41,4 +45,14 @@
   flex: 1 0 25%;
   box-sizing: border-box;
   padding: 10px;
+}
+
+.groups-container h2 {
+  display:flex;
+  justify-content: center;
+}
+
+.groups-container h6 {
+  display:flex;
+  justify-content: center;
 }

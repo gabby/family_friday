@@ -18,6 +18,7 @@ class Home extends Component {
     .then(textFile => textFile.split('\n'))
     .then(namesArr => {
       this.props.setList(namesArr)
+      console.log(namesArr)
     })
     .catch(error)
   };

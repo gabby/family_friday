@@ -37,27 +37,32 @@ class Groups extends Component {
 
   render(props){
     let groups = this.props.groups;
+    let date = new Date();
     return(
-      <div className="groups-container"> 
-        {
-          groups.map(group => {
-            return (
-              <Paper className="paper-group" key={groups.indexOf(group)}>
-                <List>
-                  <Subheader>Group {(groups.indexOf(group)+1)}</Subheader>
-                  <Divider />
-                  {
-                    group.map(name => {
-                      return (
-                        <ListItem primaryText={name} disabled={true} key={(name + group.indexOf(name))}/>
-                      )
-                    })
-                  }
-                </List>
-              </Paper>
-            )
-          })
-        }
+      <div className="groups-container">
+        <h2>Groups for Family Friday</h2> 
+        <h6>Generated on: {date.toString()}</h6>
+        <div className="groups"> 
+          {
+            groups.map(group => {
+              return (
+                <Paper className="paper-group" key={groups.indexOf(group)}>
+                  <List>
+                    <Subheader>Group {(groups.indexOf(group)+1)}</Subheader>
+                    <Divider />
+                    {
+                      group.map(name => {
+                        return (
+                          <ListItem primaryText={name} disabled={true} key={(name + group.indexOf(name))}/>
+                        )
+                      })
+                    }
+                  </List>
+                </Paper>
+              )
+            })
+          }
+        </div>
       </div>
     )
   }

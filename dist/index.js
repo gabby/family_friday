@@ -66393,6 +66393,7 @@ var Home = function (_Component) {
         return textFile.split('\n');
       }).then(function (namesArr) {
         _this2.props.setList(namesArr);
+        console.log(namesArr);
       }).catch(_util.error);
     }
   }, {
@@ -67076,7 +67077,7 @@ exports = module.exports = __webpack_require__(477)(undefined);
 
 
 // module
-exports.push([module.i, ".home {\n  display: flex;\n  justify-content: center; }\n\n.banner {\n  width: 60%;\n  height: 60%;\n  padding: 0px;\n  margin: 0px; }\n\n.groups-button {\n  display: flex;\n  justify-content: center; }\n\n.add-name-button {\n  display: flex;\n  justify-content: center; }\n\n.paper-group {\n  width: 200px;\n  margin: 5px;\n  padding: 10px; }\n\n.groups-container {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n\n.employee-list {\n  display: flex;\n  flex-wrap: wrap; }\n\n.name {\n  flex: 1 0 25%;\n  box-sizing: border-box;\n  padding: 10px; }\n", ""]);
+exports.push([module.i, "* {\n  font-family: 'Roboto', 'sans-serif'; }\n\n.home {\n  display: flex;\n  justify-content: center; }\n\n.banner {\n  width: 60%;\n  height: 60%;\n  padding: 10px;\n  margin: 10px; }\n\n.groups-button {\n  display: flex;\n  justify-content: center; }\n\n.add-name-button {\n  display: flex;\n  justify-content: center; }\n\n.paper-group {\n  width: 200px;\n  margin: 5px;\n  padding: 10px; }\n\n.groups {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n\n.employee-list {\n  display: flex;\n  flex-wrap: wrap; }\n\n.name {\n  flex: 1 0 25%;\n  box-sizing: border-box;\n  padding: 10px; }\n\n.groups-container h2 {\n  display: flex;\n  justify-content: center; }\n\n.groups-container h6 {\n  display: flex;\n  justify-content: center; }\n", ""]);
 
 // exports
 
@@ -67806,29 +67807,45 @@ var Groups = function (_Component) {
     key: 'render',
     value: function render(props) {
       var groups = this.props.groups;
+      var date = new Date();
       return _react2.default.createElement(
         'div',
         { className: 'groups-container' },
-        groups.map(function (group) {
-          return _react2.default.createElement(
-            _materialUi.Paper,
-            { className: 'paper-group', key: groups.indexOf(group) },
-            _react2.default.createElement(
-              _materialUi.List,
-              null,
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Groups for Family Friday'
+        ),
+        _react2.default.createElement(
+          'h6',
+          null,
+          'Generated on: ',
+          date.toString()
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'groups' },
+          groups.map(function (group) {
+            return _react2.default.createElement(
+              _materialUi.Paper,
+              { className: 'paper-group', key: groups.indexOf(group) },
               _react2.default.createElement(
-                _materialUi.Subheader,
+                _materialUi.List,
                 null,
-                'Group ',
-                groups.indexOf(group) + 1
-              ),
-              _react2.default.createElement(_materialUi.Divider, null),
-              group.map(function (name) {
-                return _react2.default.createElement(_materialUi.ListItem, { primaryText: name, disabled: true, key: name + group.indexOf(name) });
-              })
-            )
-          );
-        })
+                _react2.default.createElement(
+                  _materialUi.Subheader,
+                  null,
+                  'Group ',
+                  groups.indexOf(group) + 1
+                ),
+                _react2.default.createElement(_materialUi.Divider, null),
+                group.map(function (name) {
+                  return _react2.default.createElement(_materialUi.ListItem, { primaryText: name, disabled: true, key: name + group.indexOf(name) });
+                })
+              )
+            );
+          })
+        )
       );
     }
   }]);
