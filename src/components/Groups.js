@@ -15,25 +15,25 @@ class Groups extends Component {
 
   // Helper function to determine Group Size 
   findGroupSize(groupSize){
-    /* Logic: Determine if group size evenly distributes across those 3-5 team sizes */
+    /* Determine if group size evenly distributes across 3-5 team sizes */
     if (groupSize%5 === 0) return groupSize/5
     else if (groupSize%4 === 0) return groupSize/4
     else if (groupSize%3 === 0) return groupSize/3;
-    // If not, divide the team by 5 (rounding up), can remove names to move to a smaller group but cannot remove names from groups of 3, for example. This ensure that no team will be fewer than 3 and more than 5. 
+    // If not, divide the team by 5 (rounding up), can move names to fill smaller group but cannot move names from groups of 3, for example. This ensures that no team will be fewer than 3 and more than 5. 
     else return Math.ceil(groupSize/5)
   }
 
-  // Helper function to randomly distibute names into groups
+  // Helper function to randomly distribute names into groups
   generateGroups(names){
     let groups = this.findGroupSize(names.length), namesArr = [], counter = 0;
-    // Initilize namesArr with the number of groups deteremined from above helper functions
+    // Initilize array w/ the number of groups determined from findGroupSize helper fn
     for (let i=0; i<groups; i++){ 
       namesArr[i] = [];
     }
-    // Randomly select names, push into groups and remove that name from the unallocated list
+    // Randomly select names, push into groups and remove name from the unallocated list
     while (names.length){
       let randomIdx = Math.floor(Math.random() * names.length)
-      // To ensure even distribution, push to each group, reset group counter when one name has been added to each group, then concat the names list to remove the allocated name
+      // To ensure even distribution, push one to each group, reset group counter when one name has been added to each group, then remove the allocated name
       if (counter === groups) counter = 0;
       namesArr[counter].push(names[randomIdx])
       names = names.slice(0, randomIdx).concat(names.slice(randomIdx + 1))
@@ -43,10 +43,10 @@ class Groups extends Component {
   }
 
   componentWillMount(){
-    // If local storage does not have a value for the 'groups' key, then before mounting, the component will generate new groups, save it to the redux store and save it to local storage, along with a generated timestamp 
-    // Saving groups to local storage allows users to review same list if the window is closed
+    // Generate new groups if none saved in local storage , save to local storage and update store
     if (!this.props.groups.length) {
       let groupedNames = this.generateGroups(this.props.list)
+      // Generated date to let user know if this is an old or new list, based on timestamp
       let newDate = new Date()
       localStorage.setItem('date_generated', newDate)
       localStorage.setItem('groups', JSON.stringify(groupedNames))
@@ -54,6 +54,7 @@ class Groups extends Component {
     }
   }
 
+  // Handle if user wants to reset the groups, for example, if saved from last week's local storage
   handleResetGroups(event){
     event.preventDefault();
     this.props.reset();

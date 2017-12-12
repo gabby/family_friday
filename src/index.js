@@ -6,13 +6,12 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import store from './store';
 
-
+// Material UI theme setup 
 const App = () => (
   <MuiThemeProvider >
     <Main />
   </MuiThemeProvider>
 );
-
 
 ReactDOM.render(
   <Provider store={store}>
