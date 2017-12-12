@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setEmployeeList } from "../store"
+import { setEmployeeList, setGroups } from "../store"
 import { error } from 'util';
 import { RaisedButton } from 'material-ui';
 import "../../public/style.scss";
@@ -12,15 +12,18 @@ class Home extends Component {
     super(props)
   }
 
-  componentDidMount(props){
-    fetch('.../../public/employee_names.txt')
-    .then(res => res.text())
-    .then(textFile => textFile.split('\n'))
-    .then(namesArr => {
-      this.props.setList(namesArr)
-      console.log(namesArr)
-    })
-    .catch(error)
+  componentWillMount(props){
+    if (!this.props.list.length) {
+      fetch('.../../public/employee_names.txt')
+      .then(res => res.text())
+      .then(textFile => textFile.split('\n'))
+      .then(namesArr => {
+        this.props.setList(namesArr)
+      })
+      .catch(error)
+    }
+    const localSto = localStorage.getItem('groups');
+    if (localSto) return this.props.setGroups(JSON.parse(localSto));
   };
 
   render(){
@@ -38,14 +41,23 @@ class Home extends Component {
     )
   }
 };
-  
+
+const mapStateToProps = state =>{
+  return {
+    list: state.employeeList,
+    groups: state.groups
+  }
+};
 
 const mapDispatchToProps = dispatch => {
   return {
     setList: list => {
       dispatch(setEmployeeList(list))
+    },
+    setGroups: groups => {
+      dispatch(setNewGroups(groups))
     }
   }
 }
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

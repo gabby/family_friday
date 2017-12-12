@@ -17366,6 +17366,8 @@ var _store = __webpack_require__(50);
 
 var _store2 = _interopRequireDefault(_store);
 
+var _localStorage = __webpack_require__(482);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var App = function App() {
@@ -39512,18 +39514,11 @@ exports.default = reducer;
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var SET_LIST = "SET_LIST";
-var GET_LIST = 'GET_LIST';
 var ADD_EMPLOYEE = 'ADD_EMPLOYEE';
 
 var setEmployeeList = exports.setEmployeeList = function setEmployeeList(list) {
   return {
     type: SET_LIST, list: list
-  };
-};
-
-var getEmployeeList = exports.getEmployeeList = function getEmployeeList() {
-  return {
-    type: GET_LIST
   };
 };
 
@@ -39540,8 +39535,6 @@ function reducer() {
   switch (action.type) {
     case SET_LIST:
       return action.list;
-    case GET_LIST:
-      return state;
     case ADD_EMPLOYEE:
       return [].concat(_toConsumableArray(state), [action.name]);
     default:
@@ -66383,18 +66376,21 @@ var Home = function (_Component) {
   }
 
   _createClass(Home, [{
-    key: 'componentDidMount',
-    value: function componentDidMount(props) {
+    key: 'componentWillMount',
+    value: function componentWillMount(props) {
       var _this2 = this;
 
-      fetch('.../../public/employee_names.txt').then(function (res) {
-        return res.text();
-      }).then(function (textFile) {
-        return textFile.split('\n');
-      }).then(function (namesArr) {
-        _this2.props.setList(namesArr);
-        console.log(namesArr);
-      }).catch(_util.error);
+      if (!this.props.list.length) {
+        fetch('.../../public/employee_names.txt').then(function (res) {
+          return res.text();
+        }).then(function (textFile) {
+          return textFile.split('\n');
+        }).then(function (namesArr) {
+          _this2.props.setList(namesArr);
+        }).catch(_util.error);
+      }
+      var localSto = localStorage.getItem('groups');
+      if (localSto) return this.props.setGroups(JSON.parse(localSto));
     }
   }, {
     key: 'render',
@@ -66425,15 +66421,25 @@ var Home = function (_Component) {
 
 ;
 
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    list: state.employeeList,
+    groups: state.groups
+  };
+};
+
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     setList: function setList(list) {
       dispatch((0, _store.setEmployeeList)(list));
+    },
+    setGroups: function setGroups(groups) {
+      dispatch(setNewGroups(groups));
     }
   };
 };
 
-exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Home);
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Home);
 
 /***/ }),
 /* 473 */
@@ -67077,7 +67083,7 @@ exports = module.exports = __webpack_require__(477)(undefined);
 
 
 // module
-exports.push([module.i, "* {\n  font-family: 'Roboto', 'sans-serif'; }\n\n.home {\n  display: flex;\n  justify-content: center; }\n\n.banner {\n  width: 60%;\n  height: 60%;\n  padding: 10px;\n  margin: 10px; }\n\n.groups-button {\n  display: flex;\n  justify-content: center; }\n\n.add-name-button {\n  display: flex;\n  justify-content: center; }\n\n.paper-group {\n  width: 200px;\n  margin: 5px;\n  padding: 10px; }\n\n.groups {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n\n.employee-list {\n  display: flex;\n  flex-wrap: wrap; }\n\n.name {\n  flex: 1 0 25%;\n  box-sizing: border-box;\n  padding: 10px; }\n\n.groups-container h2 {\n  display: flex;\n  justify-content: center; }\n\n.groups-container h6 {\n  display: flex;\n  justify-content: center; }\n", ""]);
+exports.push([module.i, "* {\n  font-family: 'Roboto', 'sans-serif'; }\n\n.home {\n  display: flex;\n  justify-content: center; }\n\n.banner {\n  width: 60%;\n  height: 60%;\n  padding: 10px;\n  margin: 10px; }\n\n.groups-button {\n  display: flex;\n  justify-content: center; }\n\n.add-name-button {\n  display: flex;\n  justify-content: center; }\n\n.paper-group {\n  width: 200px;\n  margin: 5px;\n  padding: 10px; }\n\n.groups {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n\n.employee-list {\n  justify-content: center;\n  flex-direction: column;\n  text-align: center; }\n\n.name {\n  flex: 1 0 25%;\n  box-sizing: border-box;\n  padding: 10px; }\n\n.groups-container h2 {\n  display: flex;\n  justify-content: center; }\n\n.groups-container h6 {\n  display: flex;\n  justify-content: center; }\n", ""]);
 
 // exports
 
@@ -67672,14 +67678,23 @@ var EmployeeList = function (_Component) {
   function EmployeeList(props) {
     _classCallCheck(this, EmployeeList);
 
-    return _possibleConstructorReturn(this, (EmployeeList.__proto__ || Object.getPrototypeOf(EmployeeList)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (EmployeeList.__proto__ || Object.getPrototypeOf(EmployeeList)).call(this, props));
+
+    _this.handleAddEmployee = _this.handleAddEmployee.bind(_this);
+    return _this;
   }
 
   _createClass(EmployeeList, [{
+    key: 'handleAddEmployee',
+    value: function handleAddEmployee(event, name) {
+      event.preventDefault();
+      this.props.addName(event.target.name.value);
+      event.target.name.value = '';
+    }
+  }, {
     key: 'render',
     value: function render(props) {
       var names = this.props.list.sort();
-      console.log(names);
       return _react2.default.createElement(
         'div',
         null,
@@ -67691,7 +67706,7 @@ var EmployeeList = function (_Component) {
             null,
             _react2.default.createElement(
               'form',
-              null,
+              { onSubmit: this.handleAddEmployee },
               _react2.default.createElement(_materialUi.TextField, { type: 'text', name: 'name', floatingLabelText: ' Employee Name' }),
               _react2.default.createElement(_materialUi.FlatButton, { type: 'Submit', label: 'Add' })
             )
@@ -67780,8 +67795,8 @@ var Groups = function (_Component) {
   }
 
   _createClass(Groups, [{
-    key: 'componentDidMount',
-    value: function componentDidMount() {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
       var namesArr = [],
           groups = void 0;
       var names = this.props.list,
@@ -67800,7 +67815,6 @@ var Groups = function (_Component) {
           counter++;
         }
       }
-      console.log(namesArr);
       this.props.setGroups(namesArr);
     }
   }, {
@@ -67871,6 +67885,35 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(Groups);
+
+/***/ }),
+/* 482 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var loadState = exports.loadState = function loadState() {
+  try {
+    var serializedState = localStorage.getItem('state');
+    if (!serializedState) return undefined;
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
+
+var saveState = exports.saveState = function saveState(state) {
+  try {
+    var serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch (err) {
+    console.log(err);
+  }
+};
 
 /***/ })
 /******/ ]);

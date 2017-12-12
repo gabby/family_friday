@@ -4,7 +4,8 @@ import ReactDOM from 'react-dom';
 import Main from './components/Main';
 import {BrowserRouter as Router} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import store from './store'
+import store from './store';
+import { loadState, saveState } from "./localStorage"; 
 
 
 const App = () => (
@@ -12,6 +13,7 @@ const App = () => (
     <Main />
   </MuiThemeProvider>
 );
+
 
 ReactDOM.render(
   <Provider store={store}>

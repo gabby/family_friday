@@ -11,7 +11,7 @@ class Groups extends Component {
     super(props)
   }
 
-  componentDidMount(){
+  componentWillMount(){
     let namesArr = [], groups;
     let names = this.props.list, total = names.length;
     if (total%5 === 0) return groups = total/5
@@ -31,7 +31,6 @@ class Groups extends Component {
         counter++
       }
     }
-    console.log(namesArr)
     this.props.setGroups(namesArr)
   }
 

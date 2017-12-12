@@ -3,24 +3,29 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import store from '../store';
 import { FlatButton, List, ListItem, TextField } from 'material-ui';
-import { getEmployeeList, addEmployeeName } from "../store"
+import { addEmployeeName } from "../store"
 
 
 class EmployeeList extends Component {
   constructor(props){
-    super(props)
+    super(props);
+    this.handleAddEmployee = this.handleAddEmployee.bind(this);
   }
 
+  handleAddEmployee(event, name){
+    event.preventDefault();
+    this.props.addName(event.target.name.value);
+    event.target.name.value = ''
+  }
 
   render(props){
     let names = this.props.list.sort();
-    console.log(names)
     return (
       <div>
         <div className="add-name-button">
           <div>
-            <form>
-              <TextField type='text' name='name' floatingLabelText=' Employee Name' />
+            <form onSubmit={this.handleAddEmployee}>
+              <TextField type='text' name='name' floatingLabelText=' Employee Name'/>
               <FlatButton type='Submit' label='Add' />
             </form>
           </div>
