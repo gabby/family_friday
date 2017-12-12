@@ -13,11 +13,14 @@ class Home extends Component {
   }
 
   componentWillMount(props){
+    //At root, check to see if there is a cached employee list and a cached group formation
     let cachedList = localStorage.getItem('list');
     let cachedGroups = localStorage.getItem('groups');
+    //If they exist, set the redux store to those cached values  
     if (cachedGroups) this.props.setGroups(JSON.parse(cachedGroups));
     if (cachedList) this.props.setList(cachedList.split(','));
-   if(!this.props.list.length) {
+    // If there is nothing in the cache, read from the server-side txt file and update the store
+    if(!this.props.list.length) {
        fetch('.../../public/employee_names.txt')
       .then(res => res.text())
       .then(textFile => textFile.split('\n'))
