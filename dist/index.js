@@ -67791,16 +67791,19 @@ var Groups = function (_Component) {
   function Groups(props) {
     _classCallCheck(this, Groups);
 
-    return _possibleConstructorReturn(this, (Groups.__proto__ || Object.getPrototypeOf(Groups)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Groups.__proto__ || Object.getPrototypeOf(Groups)).call(this, props));
+
+    _this.generateGroups = _this.generateGroups.bind(_this);
+    return _this;
   }
 
   _createClass(Groups, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      var namesArr = [],
-          groups = void 0;
+    key: 'generateGroups',
+    value: function generateGroups() {
       var names = this.props.list,
-          total = names.length;
+          total = names.length,
+          namesArr = [],
+          groups = void 0;
       if (total % 5 === 0) return groups = total / 5;else if (total % 4 === 0) return groups = total / 4;else if (total % 3 === 0) return groups = total / 3;else {
         groups = Math.ceil(total / 5);
         var counter = 0;
@@ -67814,8 +67817,14 @@ var Groups = function (_Component) {
           names = names.slice(0, randomIdx).concat(names.slice(randomIdx + 1));
           counter++;
         }
+        return namesArr;
       }
-      this.props.setGroups(namesArr);
+    }
+  }, {
+    key: 'componentWillMount',
+    value: function componentWillMount() {
+      var groupedNames = this.generateGroups();
+      this.props.setGroups(groupedNames);
     }
   }, {
     key: 'render',

@@ -9,11 +9,11 @@ import "../../public/style.scss"
 class Groups extends Component {
   constructor(props){
     super(props)
+    this.generateGroups = this.generateGroups.bind(this)
   }
 
-  componentWillMount(){
-    let namesArr = [], groups;
-    let names = this.props.list, total = names.length;
+  generateGroups(){
+    let names = this.props.list, total = names.length, namesArr = [], groups;
     if (total%5 === 0) return groups = total/5
     else if (total%4 === 0) return groups = total/4
     else if (total%3 === 0) return groups = total/3;
@@ -30,8 +30,13 @@ class Groups extends Component {
         names = names.slice(0, randomIdx).concat(names.slice(randomIdx + 1))
         counter++
       }
+    return namesArr;
     }
-    this.props.setGroups(namesArr)
+  }
+
+  componentWillMount(){
+    let groupedNames = this.generateGroups()
+    this.props.setGroups(groupedNames);
   }
 
   render(props){
