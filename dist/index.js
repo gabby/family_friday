@@ -67794,36 +67794,37 @@ var Groups = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Groups.__proto__ || Object.getPrototypeOf(Groups)).call(this, props));
 
     _this.generateGroups = _this.generateGroups.bind(_this);
+    _this.findGroupSize = _this.findGroupSize.bind(_this);
     return _this;
   }
 
   _createClass(Groups, [{
+    key: 'findGroupSize',
+    value: function findGroupSize(groupSize) {
+      if (groupSize % 5 === 0) return groupSize / 5;else if (groupSize % 4 === 0) return groupSize / 4;else if (groupSize % 3 === 0) return groupSize / 3;else return Math.ceil(groupSize / 5);
+    }
+  }, {
     key: 'generateGroups',
-    value: function generateGroups() {
-      var names = this.props.list,
-          total = names.length,
+    value: function generateGroups(names) {
+      var groups = this.findGroupSize(names.length),
           namesArr = [],
-          groups = void 0;
-      if (total % 5 === 0) return groups = total / 5;else if (total % 4 === 0) return groups = total / 4;else if (total % 3 === 0) return groups = total / 3;else {
-        groups = Math.ceil(total / 5);
-        var counter = 0;
-        for (var i = 0; i < groups; i++) {
-          namesArr[i] = [];
-        }
-        while (names.length) {
-          var randomIdx = Math.floor(Math.random() * names.length);
-          if (counter === groups) counter = 0;
-          namesArr[counter].push(names[randomIdx]);
-          names = names.slice(0, randomIdx).concat(names.slice(randomIdx + 1));
-          counter++;
-        }
-        return namesArr;
+          counter = 0;
+      for (var i = 0; i < groups; i++) {
+        namesArr[i] = [];
       }
+      while (names.length) {
+        var randomIdx = Math.floor(Math.random() * names.length);
+        if (counter === groups) counter = 0;
+        namesArr[counter].push(names[randomIdx]);
+        names = names.slice(0, randomIdx).concat(names.slice(randomIdx + 1));
+        counter++;
+      }
+      return namesArr;
     }
   }, {
     key: 'componentWillMount',
     value: function componentWillMount() {
-      var groupedNames = this.generateGroups();
+      var groupedNames = this.generateGroups(this.props.list);
       this.props.setGroups(groupedNames);
     }
   }, {

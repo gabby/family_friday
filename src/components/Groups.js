@@ -10,32 +10,33 @@ class Groups extends Component {
   constructor(props){
     super(props)
     this.generateGroups = this.generateGroups.bind(this)
+    this.findGroupSize = this.findGroupSize.bind(this)
   }
 
-  generateGroups(){
-    let names = this.props.list, total = names.length, namesArr = [], groups;
-    if (total%5 === 0) return groups = total/5
-    else if (total%4 === 0) return groups = total/4
-    else if (total%3 === 0) return groups = total/3;
-    else {
-      groups = Math.ceil(total/5)
-      let counter = 0;
-      for (let i=0; i<groups; i++){
-        namesArr[i] = [];
-      }
-      while (names.length){
-        let randomIdx = Math.floor(Math.random() * names.length)
-        if (counter === groups) counter = 0;
-        namesArr[counter].push(names[randomIdx])
-        names = names.slice(0, randomIdx).concat(names.slice(randomIdx + 1))
-        counter++
-      }
-    return namesArr;
+  findGroupSize(groupSize){
+    if (groupSize%5 === 0) return groupSize/5
+    else if (groupSize%4 === 0) return groupSize/4
+    else if (groupSize%3 === 0) return groupSize/3;
+    else return Math.ceil(groupSize/5)
+  }
+
+  generateGroups(names){
+    let groups = this.findGroupSize(names.length), namesArr = [], counter = 0;
+    for (let i=0; i<groups; i++){ 
+      namesArr[i] = [];
     }
+    while (names.length){
+      let randomIdx = Math.floor(Math.random() * names.length)
+      if (counter === groups) counter = 0;
+      namesArr[counter].push(names[randomIdx])
+      names = names.slice(0, randomIdx).concat(names.slice(randomIdx + 1))
+      counter++
+    }
+    return namesArr;
   }
 
   componentWillMount(){
-    let groupedNames = this.generateGroups()
+    let groupedNames = this.generateGroups(this.props.list)
     this.props.setGroups(groupedNames);
   }
 
