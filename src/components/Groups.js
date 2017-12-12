@@ -58,6 +58,7 @@ class Groups extends Component {
     event.preventDefault();
     this.props.reset();
     localStorage.removeItem('groups');
+    this.props.history.push('/')
   }
 
   render(props){
