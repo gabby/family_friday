@@ -36,17 +36,23 @@ class Groups extends Component {
   }
 
   componentWillMount(){
-    let groupedNames = this.generateGroups(this.props.list)
-    this.props.setGroups(groupedNames);
+    if (!this.props.groups.length) {
+      let groupedNames = this.generateGroups(this.props.list)
+      let newDate = new Date()
+      console.log('NEWDATE', newDate)
+      localStorage.setItem('date_generated', newDate)
+      localStorage.setItem('groups', JSON.stringify(groupedNames))
+      return this.props.setGroups(groupedNames);
+    }
   }
 
   render(props){
     let groups = this.props.groups;
-    let date = new Date();
+    let date = localStorage.getItem('date_generated')
     return(
       <div className="groups-container">
         <h2>Groups for Family Friday</h2> 
-        <h6>Generated on: {date.toString()}</h6>
+        <h6>Generated on: {date}</h6>
         <div className="groups"> 
           {
             groups.map(group => {

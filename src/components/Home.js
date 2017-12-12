@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { setEmployeeList, setGroups } from "../store"
+import { setEmployeeList, setNewGroups } from "../store"
 import { error } from 'util';
 import { RaisedButton } from 'material-ui';
 import "../../public/style.scss";
@@ -13,8 +13,12 @@ class Home extends Component {
   }
 
   componentWillMount(props){
-    if (!this.props.list.length) {
-      fetch('.../../public/employee_names.txt')
+    let cachedList = localStorage.getItem('list');
+    let cachedGroups = localStorage.getItem('groups');
+    if (cachedGroups) this.props.setGroups(JSON.parse(cachedGroups));
+    if (cachedList) this.props.setList(cachedList.split(','));
+   if(!this.props.list.length) {
+       fetch('.../../public/employee_names.txt')
       .then(res => res.text())
       .then(textFile => textFile.split('\n'))
       .then(namesArr => {

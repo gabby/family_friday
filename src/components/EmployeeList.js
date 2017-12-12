@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import store from '../store';
+import store, { resetGroups } from '../store';
 import { FlatButton, List, ListItem, TextField } from 'material-ui';
 import { addEmployeeName } from "../store"
 
@@ -14,7 +14,11 @@ class EmployeeList extends Component {
 
   handleAddEmployee(event, name){
     event.preventDefault();
+    localStorage.removeItem('date');
+    localStorage.removeItem('groups');
+    this.props.resetGroups();
     this.props.addName(event.target.name.value);
+    localStorage.setItem('list', this.props.list)
     event.target.name.value = ''
   }
 
@@ -56,6 +60,9 @@ const mapDispatchToProps = dispatch => {
   return {
     addName: name => {
         dispatch(addEmployeeName(name))
+    },
+    resetGroups: () => {
+      dispatch(resetGroups())
     }
   }
 }
