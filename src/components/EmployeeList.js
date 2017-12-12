@@ -18,8 +18,11 @@ class EmployeeList extends Component {
     localStorage.removeItem('groups');
     this.props.resetGroups();
     this.props.addName(event.target.name.value);
-    localStorage.setItem('list', this.props.list)
     event.target.name.value = ''
+  } 
+
+  componentWillUnmount(){  
+    localStorage.setItem('list', this.props.list)  
   }
 
   render(props){

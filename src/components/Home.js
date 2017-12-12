@@ -13,19 +13,22 @@ class Home extends Component {
   }
 
   componentWillMount(props){
-    let cachedList = localStorage.getItem('list');
-    let cachedGroups = localStorage.getItem('groups');
-    if (cachedGroups) this.props.setGroups(JSON.parse(cachedGroups));
-    if (cachedList) this.props.setList(cachedList.split(','));
-   if(!this.props.list.length) {
-       fetch('.../../public/employee_names.txt')
-      .then(res => res.text())
-      .then(textFile => textFile.split('\n'))
-      .then(namesArr => {
-        this.props.setList(namesArr)
-      })
-      .catch(error)
+    if (!this.props.list.length){
+      let cachedList = localStorage.getItem('list');
+      let cachedGroups = localStorage.getItem('groups');
+      if (cachedGroups) this.props.setGroups(JSON.parse(cachedGroups));
+      if (cachedList) this.props.setList(cachedList.split(','));
+      else if(!cachedList && !cachedGroups) {
+         fetch('.../../public/employee_names.txt')
+        .then(res => res.text())
+        .then(textFile => textFile.split('\n'))
+        .then(namesArr => {
+          this.props.setList(namesArr)
+        })
+        .catch(error)
+      }
     }
+
   };
 
   render(){

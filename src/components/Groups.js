@@ -39,7 +39,6 @@ class Groups extends Component {
     if (!this.props.groups.length) {
       let groupedNames = this.generateGroups(this.props.list)
       let newDate = new Date()
-      console.log('NEWDATE', newDate)
       localStorage.setItem('date_generated', newDate)
       localStorage.setItem('groups', JSON.stringify(groupedNames))
       return this.props.setGroups(groupedNames);
