@@ -5,7 +5,6 @@ import Main from './components/Main';
 import {BrowserRouter as Router} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import store from './store';
-import { loadState, saveState } from "./localStorage"; 
 
 
 const App = () => (

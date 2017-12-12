@@ -12,12 +12,16 @@ class EmployeeList extends Component {
     this.handleAddEmployee = this.handleAddEmployee.bind(this);
   }
 
+  // Submit Handler for Add New Employee
   handleAddEmployee(event, name){
     event.preventDefault();
+    // Current groups  no longer valid with addition of new employee, remove items from local storage and reset state 
     localStorage.removeItem('date');
     localStorage.removeItem('groups');
     this.props.resetGroups();
+    // Dispatch action to add name to list, updates redux store
     this.props.addName(event.target.name.value);
+    // clear text field
     event.target.name.value = ''
   } 
 
