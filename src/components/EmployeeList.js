@@ -25,8 +25,8 @@ class EmployeeList extends Component {
             </form>
           </div>
         </div>
-        <div className="container employee-container">
-          <List>
+        <div className="employee-container">
+          <List className="employee-list">
           {
             names.map(name => {
               return (

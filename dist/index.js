@@ -67076,7 +67076,7 @@ exports = module.exports = __webpack_require__(477)(undefined);
 
 
 // module
-exports.push([module.i, ".home {\n  display: flex;\n  justify-content: center; }\n\n.banner {\n  width: 60%;\n  height: 60%;\n  padding: 0px;\n  margin: 0px; }\n\n.groups-button {\n  display: flex;\n  justify-content: center; }\n\n.add-name-button {\n  display: flex;\n  justify-content: center; }\n\n.paper-group {\n  width: 200px;\n  margin: 5px;\n  padding: 10px; }\n\n.groups-container {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n", ""]);
+exports.push([module.i, ".home {\n  display: flex;\n  justify-content: center; }\n\n.banner {\n  width: 60%;\n  height: 60%;\n  padding: 0px;\n  margin: 0px; }\n\n.groups-button {\n  display: flex;\n  justify-content: center; }\n\n.add-name-button {\n  display: flex;\n  justify-content: center; }\n\n.paper-group {\n  width: 200px;\n  margin: 5px;\n  padding: 10px; }\n\n.groups-container {\n  display: flex;\n  justify-content: center;\n  flex-wrap: wrap; }\n\n.employee-list {\n  display: flex;\n  flex-wrap: wrap; }\n\n.name {\n  flex: 1 0 25%;\n  box-sizing: border-box;\n  padding: 10px; }\n", ""]);
 
 // exports
 
@@ -67698,10 +67698,10 @@ var EmployeeList = function (_Component) {
         ),
         _react2.default.createElement(
           'div',
-          { className: 'container employee-container' },
+          { className: 'employee-container' },
           _react2.default.createElement(
             _materialUi.List,
-            null,
+            { className: 'employee-list' },
             names.map(function (name) {
               return _react2.default.createElement(_materialUi.ListItem, { primaryText: name, disabled: true, key: name, className: 'name' });
             })

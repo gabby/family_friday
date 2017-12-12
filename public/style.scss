@@ -30,4 +30,15 @@
   display:flex;
   justify-content: center;
   flex-wrap: wrap;
+} 
+
+.employee-list{
+  display:flex;
+  flex-wrap: wrap;
+}
+
+.name{
+  flex: 1 0 25%;
+  box-sizing: border-box;
+  padding: 10px;
 }
