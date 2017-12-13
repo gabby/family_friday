@@ -46,6 +46,17 @@ This only accounts for functional features, but I can imagine additional fun fea
 * [React-Redux](https://redux.js.org/docs/basics/UsageWithReact.html) - State container for Javascript apps
 * [Material-UI](http://www.material-ui.com/) - React components that implement Google's Material Design
 
+## Tests
+
+Limited tests to verify expected redux store action behavior. To run tests:
+
+```
+git clone https://github.com/gabby/family_friday.git
+cd family_friday
+npm install
+npm run test
+```
+
 ## Learnings
 
 * localStorage: I've previously utilized session storage and the redux store. While seemingly simple to implement, it was challenging at first to understand where localStorage belonged in the application and it was  a great experience to tackle something I've never attempted before
