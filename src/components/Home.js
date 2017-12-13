@@ -7,7 +7,6 @@ import { RaisedButton } from 'material-ui';
 import { lightBlueA400 } from 'material-ui/styles/colors';
 import "../../public/style.scss";
 
-
 class Home extends Component {
   constructor(props){
     super(props)
@@ -25,7 +24,6 @@ class Home extends Component {
   }
 
   componentWillMount(props){
-    localStorage.clear();
     let nameFile = '.../../public/employee_names.txt'
     if (!this.props.list.length){
       let cachedList = localStorage.getItem('list');
