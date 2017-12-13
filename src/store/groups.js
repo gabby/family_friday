@@ -1,6 +1,6 @@
 const SET_GROUPS = 'GENERATE_GROUPS';
 const RESET_GROUPS = 'RESET_GROUPS';
-import { generateGroups } from '../utils';
+import { generateGroups } from '../utils' 
 
 export const setNewGroups = groups => {
   return {
