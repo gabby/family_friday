@@ -26,7 +26,8 @@ To account for the above limitations I would consider the following improvements
 * Database: to store additional data like: department, attending/not-attending, previous group formations, this would serve as one source of truth to any employee who would like to generate a group, and can account if a group has already been generated 
 * Admin/Employee login so someone may mark themselves as absent, or an admin (ea, office coordinator, HR, etc) could mark others as absent
 * List maintentance will be  more manageable, for example, addnew employees can be automated with one of HR's onboarding processes, and an Admin for example can remove users from a list
-* With historical data of groups formed, we can generate different groups each week 
+* With historical data of groups formed, we can generate different groups each week
+* Dynamic group sizes, for example, can choose from `Fewest Groups`, `Smallest Sized Groups`, `Groups of 4`, etc.  
 
 This only accounts for core features, but can imagine additional fun features like a random restuarant picker, an ice-breaker question, etc. 
 
