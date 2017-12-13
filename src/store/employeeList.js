@@ -1,5 +1,5 @@
-const SET_LIST = "SET_LIST"
-const ADD_EMPLOYEE = 'ADD_EMPLOYEE';
+export const SET_LIST = "SET_LIST"
+export const ADD_EMPLOYEE = 'ADD_EMPLOYEE';
 
 export const setEmployeeList = list => {
   return {

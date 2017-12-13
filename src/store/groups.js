@@ -1,5 +1,5 @@
-const SET_GROUPS = 'GENERATE_GROUPS';
-const RESET_GROUPS = 'RESET_GROUPS';
+export const SET_GROUPS = 'GENERATE_GROUPS';
+export const RESET_GROUPS = 'RESET_GROUPS';
 import { generateGroups } from '../utils' 
 
 export const setNewGroups = groups => {
