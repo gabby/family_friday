@@ -10,22 +10,29 @@ import "../../public/style.scss";
 class Home extends Component {
   constructor(props){
     super(props)
+    this.employeeNameUpload = this.employeeNameUpload.bind(this)
+  }
+
+  employeeNameUpload(file){
+    fetch(file)
+    .then(res => res.text())
+    .then(textFile => textFile.split('\n'))
+    .then(namesArr => {
+      this.props.setList(namesArr)
+    })
+    .catch(error)
   }
 
   componentWillMount(props){
+    localStorage.clear();
+    let nameFile = '.../../public/employee_names.txt'
     if (!this.props.list.length){
       let cachedList = localStorage.getItem('list');
       let cachedGroups = localStorage.getItem('groups');
       if (cachedGroups) this.props.setGroups(JSON.parse(cachedGroups));
       if (cachedList) this.props.setList(cachedList.split(','));
       else if(!cachedList && !cachedGroups) {
-         fetch('.../../public/employee_names.txt')
-        .then(res => res.text())
-        .then(textFile => textFile.split('\n'))
-        .then(namesArr => {
-          this.props.setList(namesArr)
-        })
-        .catch(error)
+        this.employeeNameUpload(nameFile);
       }
     }
 
