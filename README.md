@@ -1,13 +1,17 @@
 # Apartment List Challenge: Family Friday
 
-One Paragraph of project description goes here
+It's Friday, and it's time to get together. This React Node.js web application is a simple tool to randomly generate groups for Family Friday lunch.
 
-## Getting Started
+## Usage
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-## Tests
-
+* An employee list is read from a default text file. 
+* Click `Employee List` in the top right corner to view the employees currently on your list or to add an employee
+* From `/list`, enter a new name in the text field and click `Add` to submit, see list update and updated list saved to local storage  
+* When employee is added, `Group` local storage and store is reset since list is no longer valid 
+* Click on `Apartment List logo`, left navbar icon, to return to home 
+* Click on `Groups`  to either: view previously generated groups saved in local storage, or generate new groups if none cached
+* From `/groups` view date of group generated to determine if new or if redisplayed from local storage (say if the window is closed on Friday before everyone has seen the list)
+* From `/groups`, click `Reset` to clear, redirected back to home to allow user to regenerate groups 
 
 
 ### Limitations
