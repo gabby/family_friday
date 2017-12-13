@@ -12,8 +12,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Limitations
 
-Given the scope of the challenge, handling pretty much everything on the client-side made the most sense. While I'll go into future improvements of what a database can offer in the next section, it would be overkill to setup a database for a simple app such as this. However, there are tradeoffs: 
+Given the scope of the challenge, handling everything on the client-side made the most sense for this simple application, but it does come with its limitations: 
 
+* Starting employee list is read from a server-side text file, removing or appending names from the client-side is not an option. Realistically, I don't foresee the need to upload a new employee list frequently, so it did not make sense to build out this feature.
 * Groups must be generated from the same exact browser to utilize the data stored in local storage for the most up-to-date list. This is inconvenient and can easily become more difficult to maintain when new employees are added frequently, and/or if any employee can generate teams. 
 * This implementation assumes that all employees will be present and/or will be participating in Family Friday. Someone may be out of office or have a prior engagement. Additionally, removing employees can be supported, but not the most efficiently in this client-side application.
 * Group sort does not take employee department into consideration, especially if the goal is to diversify the groups each week. 
@@ -22,14 +23,15 @@ Given the scope of the challenge, handling pretty much everything on the client-
 
 ### Future Improvements
 
-To account for the above limitations I would consider the following improvements: 
-* Database: to store additional data like: department, attending/not-attending, previous group formations, this would serve as one source of truth to any employee who would like to generate a group, and can account if a group has already been generated 
-* Admin/Employee login so someone may mark themselves as absent, or an admin (ea, office coordinator, HR, etc) could mark others as absent
-* List maintentance will be  more manageable, for example, addnew employees can be automated with one of HR's onboarding processes, and an Admin for example can remove users from a list
-* With historical data of groups formed, we can generate different groups each week
-* Dynamic group sizes, for example, can choose from `Fewest Groups`, `Smallest Sized Groups`, `Groups of 4`, etc.  
+To address the above limitations I would consider the following improvements: 
 
-This only accounts for core features, but can imagine additional fun features like a random restuarant picker, an ice-breaker question, etc. 
+* Database and API - store additional data (i.e. team, attending/not-attending, previous groups history, etc), serve as one source of truth, accesible from any browser
+* Admin/Employee login -  enable an admin (ea, office coordinator, HR, etc) or employees themselves to mark as not-attending and removed from the grouping list
+* Maintaining the master employee list will be  more manageable, for example, and can be automated with HR's processes
+* Generate different groups each week using historical data
+* Allow for dynamic group sizes, for example, can choose from `Fewest Groups`, `Smallest Sized Groups`, `Groups of 4`, etc.  
+
+This only accounts for functional features, but I can imagine additional fun features like a random restuarant picker, an ice-breaker question, etc. 
 
 
 ## Built With
