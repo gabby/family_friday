@@ -2,6 +2,8 @@
 
 It's Friday, and it's time to get together. This React Node.js web application is a simple tool to randomly generate groups for Family Friday lunch.
 
+Launch Family Friday app here --->[Family Friday](https://evening-plains-36201.herokuapp.com/) <---
+
 ## Usage
 
 * An employee list is read from a default text file. 
