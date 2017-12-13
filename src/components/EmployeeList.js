@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import store, { resetGroups } from '../store';
 import { FlatButton, List, ListItem, TextField } from 'material-ui';
 import { addEmployeeName } from "../store"
+import { lightBlueA400 } from 'material-ui/styles/colors';
 
 
 class EmployeeList extends Component {
@@ -38,7 +39,7 @@ class EmployeeList extends Component {
           <div>
             <form onSubmit={this.handleAddEmployee}>
               <TextField type='text' name='name' floatingLabelText=' Employee Name'/>
-              <FlatButton type='Submit' label='Add' />
+              <FlatButton type='Submit' label='Add' labelStyle={{color:lightBlueA400}} />
             </form>
           </div>
         </div>

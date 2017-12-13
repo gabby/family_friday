@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setNewGroups, resetGroups } from "../store";
 import { AppBar, Subheader, Divider, Paper, List, ListItem, RaisedButton } from 'material-ui';
 import "../../public/style.scss"
+import { lightBlueA400 } from 'material-ui/styles/colors';
 
 class Groups extends Component {
   constructor(props){
@@ -71,7 +72,7 @@ class Groups extends Component {
         <h6>Generated on: {date}</h6>
         <div className="reset-button">
           <Link to="/">
-            <RaisedButton type='button' label='Reset' onClick={this.handleResetGroups}/>
+            <RaisedButton type='button' label='Reset' onClick={this.handleResetGroups} labelColor={lightBlueA400}/>
           </Link>
         </div>
         <div className="groups"> 

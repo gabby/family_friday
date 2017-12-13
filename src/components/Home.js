@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { setEmployeeList, setNewGroups } from "../store"
 import { error } from 'util';
 import { RaisedButton } from 'material-ui';
+import { lightBlueA400 } from 'material-ui/styles/colors';
 import "../../public/style.scss";
 
 
@@ -42,11 +43,11 @@ class Home extends Component {
     return (
       <div>
         <div className="home">
-         <img className="banner" src="../../public/group_photo.jpg" />
+          <img className="banner" src="../../public/group_photo.jpg" />
         </div>
         <div className="groups-button">
           <Link to="/groups">
-            <RaisedButton label="Groups"/>
+            <RaisedButton label="Groups" labelColor={ lightBlueA400 }/>
           </Link>
         </div>
       </div>
