@@ -1,5 +1,6 @@
 const SET_GROUPS = 'GENERATE_GROUPS';
 const RESET_GROUPS = 'RESET_GROUPS';
+import { generateGroups } from '../utils';
 
 export const setNewGroups = groups => {
   return {
@@ -19,4 +20,10 @@ export default function reducer(state = [], action){
     case RESET_GROUPS: return [];
     default: return state;
   }
-}
+} 
+
+export const createNewGroups = namesList => dispatch => {
+  let numsArr = generateGroups(namesList);
+  return dispatch(setNewGroups(numsArr))
+} 
+
