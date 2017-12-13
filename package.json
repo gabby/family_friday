@@ -4,7 +4,7 @@
   "description": "ApartmentList Challenge - Family Friday",
   "main": "index.js",
   "scripts": {
-    "start": "node server",
+    "start": "node ./src/server",
     "start-dev": "webpack -w & nodemon ./src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
