@@ -10,7 +10,6 @@ import "../../public/style.scss";
 class Home extends Component {
   constructor(props){
     super(props)
-    this.employeeNameUpload = this.employeeNameUpload.bind(this)
   }
 
   employeeNameUpload(file){
@@ -24,6 +23,7 @@ class Home extends Component {
   }
 
   componentWillMount(props){
+    localStorage.clear();
     let nameFile = '.../../public/employee_names.txt'
     if (!this.props.list.length){
       let cachedList = localStorage.getItem('list');
