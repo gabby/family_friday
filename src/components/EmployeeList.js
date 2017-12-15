@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import store, { resetGroups } from '../store';
-import { FlatButton, List, ListItem, TextField } from 'material-ui';
-import { addEmployeeName } from "../store"
+import { FlatButton, List, ListItem, TextField, RaisedButton } from 'material-ui';
+import { addEmployeeName, addExcludedName } from "../store"
 import { lightBlueA400 } from 'material-ui/styles/colors';
 
 
@@ -11,6 +11,7 @@ class EmployeeList extends Component {
   constructor(props){
     super(props);
     this.handleAddEmployee = this.handleAddEmployee.bind(this);
+    this.handleAddExcluded = this.handleAddExcluded.bind(this);
   }
 
   // Handler for Add New Employee
@@ -26,6 +27,11 @@ class EmployeeList extends Component {
     event.target.name.value = ''
   } 
 
+  handleAddExcluded(event){
+    event.preventDefault();
+    this.props.addExclusion(event.target.id);
+  }
+
   componentWillUnmount(){  
     // save the most updated list
     localStorage.setItem('list', this.props.list)  
@@ -38,7 +44,7 @@ class EmployeeList extends Component {
         <div className="add-name-button">
           <div>
             <form onSubmit={this.handleAddEmployee}>
-              <TextField type='text' name='name' floatingLabelText=' Employee Name'/>
+              <TextField type='text' name='name' floatingLabelText='Employee Name'/>
               <FlatButton type='Submit' label='Add' labelStyle={{color:lightBlueA400}} />
             </form>
           </div>
@@ -48,7 +54,9 @@ class EmployeeList extends Component {
           {
             names.map(name => {
               return (
-                <ListItem primaryText={name} disabled={true} key={name} className="name"/>
+                <div key={name}>
+                  <ListItem disabled={true} className="name">{name} <button className="remove-btn" type="button" key={name} onClick={this.handleAddExcluded} id={name}>Remove</button></ListItem>
+                </div>
               )
             })
           }
@@ -72,6 +80,9 @@ const mapDispatchToProps = dispatch => {
     },
     resetGroups: () => {
       dispatch(resetGroups())
+    },
+    addExclusion: name => {
+      dispatch(addExcludedName(name))
     }
   }
 }

@@ -7,19 +7,27 @@ export const findGroupSize = function(groupSize){
   else return Math.ceil(groupSize/5)
 } 
 
-export const generateGroups = function(names){
-  let numOfGroups = findGroupSize(names.length), namesArr = [], counter = 0, newDate = new Date();
+export const removeExcludedNames = function(fullListArr, excludedNamesArr){
+  if (fullListArr && excludedNamesArr) {
+    console.log(fullListArr.filter(elem => !excludedNamesArr.includes(elem)))
+    return fullListArr.filter(elem => !excludedNamesArr.includes(elem))
+  }
+}
+
+export const generateGroups = function(fullListArr, excludedNamesArr){
+  if (excludedNamesArr.length) fullListArr = removeExcludedNames(fullListArr, excludedNamesArr)
+  let numOfGroups = findGroupSize(fullListArr.length), namesArr = [], counter = 0, newDate = new Date();
   // Initilize array w/ the number of groups determined from findGroupSize helper fn
   for (let i=0; i<numOfGroups; i++){ 
     namesArr[i] = [];
   }
   // Randomly select names, push into groups and remove name from the unallocated list
-  while (names.length){
-    let randomIdx = Math.floor(Math.random() * names.length)
+  while (fullListArr.length){
+    let randomIdx = Math.floor(Math.random() * fullListArr.length)
     // To ensure even distribution, push one to each group, reset group counter when one name has been added to each group, then remove the allocated name
     if (counter === numOfGroups) counter = 0;
-    namesArr[counter].push(names[randomIdx])
-    names = names.slice(0, randomIdx).concat(names.slice(randomIdx + 1))
+    namesArr[counter].push(fullListArr[randomIdx])
+    fullListArr = fullListArr.slice(0, randomIdx).concat(fullListArr.slice(randomIdx + 1))
     counter++
   }
   localStorage.setItem('date_generated', newDate)

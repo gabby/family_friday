@@ -22,8 +22,8 @@ export default function reducer(state = [], action){
   }
 } 
 
-export const createNewGroups = namesList => dispatch => {
-  let numsArr = generateGroups(namesList);
+export const createNewGroups = (namesList, excludedList) => dispatch => {
+  let numsArr = generateGroups(namesList, excludedList);
   return dispatch(setNewGroups(numsArr))
 } 
 

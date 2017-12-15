@@ -14,7 +14,7 @@ class Groups extends Component {
 
   componentWillMount(){
     if (!this.props.groups.length) {
-      return this.props.setGroups(this.props.list);
+      return this.props.setGroups(this.props.list, this.props.exclude);
     }
   }
 
@@ -67,14 +67,15 @@ class Groups extends Component {
 const mapStateToProps = state =>{
   return {
     groups: state.groups,
-    list: state.employeeList
+    list: state.employeeList,
+    exclude: state.exclusionList
   }
 }; 
 
 const mapDispatchToProps = dispatch => {
   return {
-    setGroups: list => {
-      dispatch(createNewGroups(list))
+    setGroups: (namesList, excludedList) => {
+      dispatch(createNewGroups(namesList, excludedList))
     },
     resetGroups: () => {
       dispatch(resetGroups())
