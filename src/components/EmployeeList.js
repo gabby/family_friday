@@ -39,6 +39,8 @@ class EmployeeList extends Component {
 
   render(props){
     let names = this.props.list.sort();
+    let exclude = this.props.exclude.sort();
+    console.log(exclude)
     return (
       <div>
         <div className="add-name-button">
@@ -49,8 +51,14 @@ class EmployeeList extends Component {
             </form>
           </div>
         </div>
+        <div>
+
+        </div>
         <div className="employee-container">
           <List className="employee-list">
+          {
+            (exclude.length) ?  <ListItem disabled={true}>{`Not attending: ${exclude}`}</ListItem> : null
+          }
           {
             names.map(name => {
               return (
@@ -69,7 +77,8 @@ class EmployeeList extends Component {
   
 const mapStateToProps = state =>{
   return {
-    list: state.employeeList
+    list: state.employeeList,
+    exclude: state.exclusionList
   }
 }; 
 

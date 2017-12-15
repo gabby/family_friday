@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { createNewGroups, resetGroups } from "../store";
+import { createNewGroups, resetGroups, resetExclusionList } from "../store";
 import { AppBar, Subheader, Divider, Paper, List, ListItem, RaisedButton } from 'material-ui';
 import "../../public/style.scss"
 import { lightBlueA400 } from 'material-ui/styles/colors';
@@ -22,6 +22,7 @@ class Groups extends Component {
   handleResetGroups(event){
     event.preventDefault();
     this.props.resetGroups();
+    this.props.resetExclude();
     localStorage.removeItem('groups');
     this.props.history.push('/')
   }
@@ -79,6 +80,9 @@ const mapDispatchToProps = dispatch => {
     },
     resetGroups: () => {
       dispatch(resetGroups())
+    },
+    resetExclude: () =>{
+      dispatch(resetExclusionList())
     }
   }
 }
