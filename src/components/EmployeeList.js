@@ -29,6 +29,9 @@ class EmployeeList extends Component {
 
   handleAddExcluded(event){
     event.preventDefault();
+    localStorage.removeItem('date');
+    localStorage.removeItem('groups');
+    this.props.resetGroups();
     this.props.addExclusion(event.target.id);
   }
 
@@ -40,7 +43,6 @@ class EmployeeList extends Component {
   render(props){
     let names = this.props.list.sort();
     let exclude = this.props.exclude.sort();
-    console.log(exclude)
     return (
       <div>
         <div className="add-name-button">

@@ -8,10 +8,8 @@ export const findGroupSize = function(groupSize){
 } 
 
 export const removeExcludedNames = function(fullListArr, excludedNamesArr){
-  if (fullListArr && excludedNamesArr) {
-    console.log(fullListArr.filter(elem => !excludedNamesArr.includes(elem)))
-    return fullListArr.filter(elem => !excludedNamesArr.includes(elem))
-  }
+  if (fullListArr && excludedNamesArr) return fullListArr.filter(elem => !excludedNamesArr.includes(elem))
+  
 }
 
 export const generateGroups = function(fullListArr, excludedNamesArr){
