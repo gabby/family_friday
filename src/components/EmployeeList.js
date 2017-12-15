@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import store, { resetGroups } from '../store';
+import store, { resetGroups, resetExclusionList } from '../store';
 import { FlatButton, List, ListItem, TextField, RaisedButton } from 'material-ui';
 import { addEmployeeName, addExcludedName } from "../store"
 import { lightBlueA400 } from 'material-ui/styles/colors';
@@ -12,6 +12,7 @@ class EmployeeList extends Component {
     super(props);
     this.handleAddEmployee = this.handleAddEmployee.bind(this);
     this.handleAddExcluded = this.handleAddExcluded.bind(this);
+    this.handleResetExclusion = this.handleResetExclusion.bind(this);
   }
 
   // Handler for Add New Employee
@@ -33,6 +34,11 @@ class EmployeeList extends Component {
     localStorage.removeItem('groups');
     this.props.resetGroups();
     this.props.addExclusion(event.target.id);
+  }
+
+  handleResetExclusion(event){
+    event.preventDefault();
+    this.props.resetExclusion();
   }
 
   componentWillUnmount(){  
@@ -59,7 +65,7 @@ class EmployeeList extends Component {
         <div className="employee-container">
           <List className="employee-list">
           {
-            (exclude.length) ?  <ListItem disabled={true}>{`Not attending: ${exclude}`}</ListItem> : null
+            (exclude.length) ?  <div><ListItem disabled={true}>{`Not attending: ${exclude}`} <FlatButton type="button" label="Reset" labelStyle={{color:lightBlueA400}} onClick={this.handleResetExclusion}/></ListItem></div> : null
           }
           {
             names.map(name => {
@@ -94,6 +100,9 @@ const mapDispatchToProps = dispatch => {
     },
     addExclusion: name => {
       dispatch(addExcludedName(name))
+    },
+    resetExclusion: () => {
+      dispatch(resetExclusionList())
     }
   }
 }
